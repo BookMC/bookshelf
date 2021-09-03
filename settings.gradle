@@ -1,0 +1,17 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        mavenLocal()
+        maven {
+            url "https://maven.bookmc.org"
+        }
+        maven {
+            url "https://maven.fabricmc.net"
+        }
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "book-example-mod"
+
