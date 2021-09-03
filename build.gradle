@@ -1,58 +1,54 @@
 plugins {
-    id "java"
-    id "me.dreamhopping.pml.gradle" version "3.10.0+build.20"
+    id "me.dreamhopping.pml.gradle" version "3.12.1+build.26"
     id "org.bookmc.annotation-processor-configuration" version "0.2.0+build.5"
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(16)
-    }
-}
+subprojects {
+    apply plugin: "java"
+    apply plugin: "me.dreamhopping.pml.gradle"
+    apply plugin: "org.bookmc.annotation-processor-configuration"
 
-group "com.example"
-version "0.1.0"
-
-repositories {
-    mavenCentral()
-    maven {
-        name "BooKMC"
-        url "https://maven.bookmc.org"
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(16)
+        }
     }
 
-    maven {
-        name "FabricMC"
-        url "https://maven.fabricmc.net"
+    group "org.bookmc"
+    version "0.1.0"
+
+    sourceSets {
+        // We create a "virtual" sourceset as this allow for access to the APIs
+        // without exposure to version-specific code. In other words this could
+        // does not require you to use it in the target-version's sourceset
+        // but can be used from the main sourceset.
+        virtual {}
     }
-}
+
+    repositories {
+        mavenCentral()
+        maven {
+            name "BooKMC"
+            url "https://maven.bookmc.org"
+        }
+
+        maven {
+            name "FabricMC"
+            url "https://maven.fabricmc.net"
+        }
+    }
 
 
-dependencies {
-    // We want to use Log4J in the "main" sourceset where
-    // there is no Minecraft dependencies so we must specify it
-    // we only want it to be for compilation as it's already
-    // provided to us at runtime by the game.
-    compileOnly "org.apache.logging.log4j:log4j-core:2.13.2"
+    dependencies {
+        compileOnly "org.apache.logging.log4j:log4j-core:2.13.2"
+        remapImplementation "org.bookmc:minecraft:0.12.0+build.31"
 
-    // This is the hook that will load your mod. It should NOT
-    // be inside your jar at runtime but we need to keep it here
-    // for development so that everything works fine here
-    // The "remapImplementation" configuration means that it
-    // requests the maven repository for the -dev classifier
-    // of this artifact so that it will be unmapped (ready for development)
-    // If you choose to bundle this unmapped library it should be remapped
-    // by the reobf${version} task.
-    remapImplementation "org.bookmc:minecraft:0.12.0+build.31"
-}
+        compileOnly sourceSets.virtual.runtimeClasspath
+    }
 
-minecraft {
-    // If you want seperate jars per version (Recommended)
-    separateVersionJars()
+    minecraft {
+        separateVersionJars()
 
-    // Change this to whatever versions you want to build for, for example you can do:
-    // target "1.15.2", "1.16.4"
-    // if you only want one version:
-    // Even though you can choose any version the Hook only supports certain versions so beware!
-    // Anything on 1.14+ and yarn mapped should be safe however.
-    target "1.17.1"
+        target "1.17.1"
+    }
 }
