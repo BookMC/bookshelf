@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "compatibilityLevel": "JAVA_16",
+  "package": "org.bookmc.resource.mixin",
+  "refmap": "mixin.resource_loader.refmap.json",
+  "minVersion": "0.8",
+  "verbose": true,
+  "client": [
+    "api.AbstractResourcePackAccessor",
+    "impl.MixinMinecraft_AddResourcePack",
+    "impl.MixinGuiScreenResourcePacks_AddResourceEntry"
+  ]
+}

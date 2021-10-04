@@ -1,9 +1,9 @@
 {
-  "name": "bookshelf",
-  "id": "bookshelf",
+  "name": "bookshelf-resource-loader",
+  "id": "bookshelf-resource-loader",
   "version": "${version}",
   "schemaVersion": 0,
-  "description": "Bookshelf is a standard library for BookMC to provide utilities to developers",
+  "description": "A minecraft resource loader for Book",
   "authors": {
     "BookMC": {
       "github": "https://github.com/BookMC"
@@ -18,5 +18,8 @@
     "book-loader": "*"
   },
   "entrypoint": {
+    "mixin": [
+      "mixin.resource_loader.json"
+    ]
   }
 }
