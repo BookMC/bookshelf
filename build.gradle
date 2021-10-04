@@ -3,7 +3,7 @@ plugins {
     id "org.bookmc.annotation-processor-configuration" version "0.2.0+build.5"
 }
 
-subprojects {
+allprojects {
     apply plugin: "java"
     apply plugin: "me.dreamhopping.pml.gradle"
     apply plugin: "org.bookmc.annotation-processor-configuration"
@@ -29,7 +29,7 @@ subprojects {
         mavenCentral()
         maven {
             name "BooKMC"
-            url "https://maven.bookmc.org"
+            url "https://maven.bookmc.org/releases/"
         }
 
         maven {
@@ -41,14 +41,29 @@ subprojects {
 
     dependencies {
         compileOnly "org.apache.logging.log4j:log4j-core:2.13.2"
-        remapImplementation "org.bookmc:minecraft:0.12.0+build.31"
+        implementation "org.bookmc:book-loader:1.0.3"
+        remapImplementation "org.bookmc:minecraft:0.22.0"
 
         compileOnly sourceSets.virtual.runtimeClasspath
+    }
+
+    processResources {
+        inputs.property "version", project.version
+
+        filesMatching("book.mod.json") {
+            expand "version": project.version
+        }
     }
 
     minecraft {
         separateVersionJars()
 
-        target "1.17.1"
+        target "1.17.1", "1.8.9"
+    }
+}
+
+subprojects {
+    dependencies {
+        implementation project(":")
     }
 }
