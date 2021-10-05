@@ -1,0 +1,26 @@
+{
+  "name": "bookshelf-hud-events",
+  "id": "bookshelf-hud-events",
+  "version": "${version}",
+  "schemaVersion": 0,
+  "description": "Bookshelf is a standard library for BookMC to provide utilities to developers",
+  "authors": {
+    "BookMC": {
+      "github": "https://github.com/BookMC"
+    },
+    "ChachyDev": {
+      "github": "https://github.com/ChachyDev"
+    }
+  },
+  "license": "LGPL-3.0",
+  "environment": "*",
+  "depends": {
+    "book-loader": "*",
+    "bookshelf": "*"
+  },
+  "entrypoint": {
+    "mixin": [
+      "mixin.bookshelf_hud_events.json"
+    ]
+  }
+}

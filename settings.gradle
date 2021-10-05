@@ -15,4 +15,4 @@ pluginManagement {
 
 rootProject.name = "bookshelf"
 
-include ":bookshelf-resource-loader"
+include ":bookshelf-resource-loader", ":bookshelf-hud-events"
