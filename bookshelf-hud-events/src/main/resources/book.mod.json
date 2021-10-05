@@ -3,7 +3,7 @@
   "id": "bookshelf-hud-events",
   "version": "${version}",
   "schemaVersion": 0,
-  "description": "Bookshelf is a standard library for BookMC to provide utilities to developers",
+  "description": "A core API for developers to run actions on HUD changes",
   "authors": {
     "BookMC": {
       "github": "https://github.com/BookMC"
