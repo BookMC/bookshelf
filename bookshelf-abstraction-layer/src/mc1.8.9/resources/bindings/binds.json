@@ -1,0 +1,3 @@
+{
+  "org.bookmc.abstraction.api.client.MinecraftGameClient": "org.bookmc.abstraction.impl.client.V1_8_9MinecraftGameClient"
+}
